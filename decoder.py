@@ -6,10 +6,14 @@ def decode(file_path, keys, max_bin_digit=16):
     with open(file_path, 'rb') as file:
         binary_values = file.read()
     code = ''.join(format(byte, '08b') for byte in binary_values)
+    
+    # Reduplicate the shuffling with same kesy
     idx = np.arange(len(code))
     for key in keys:
         random.seed(key)
         random.shuffle(idx)
+
+    # Reverse the shuffling
     ordered = ''.join(np.array(list(code))[np.argsort(np.array(idx))])
 
     with open(file_path.replace(".bin", "_decoded.txt"), 'w') as file:

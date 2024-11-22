@@ -8,6 +8,7 @@ def encode(file_path, keys, max_bin_digit=16):
     bin_str = ''.join([bin(ord(c))[2:].zfill(max_bin_digit) for c in text])
     shuffled_bin = list(bin_str)
     for key in keys:
+        # shuffle the binary digits many times using different keys
         random.seed(key)
         random.shuffle(shuffled_bin)
 
